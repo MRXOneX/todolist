@@ -14,6 +14,7 @@ list.addEventListener('click', (e) => {
       let div = e.target.parentNode;
       local();
       div.remove();
+      local();
    }
 });
 const newElements = () => {
