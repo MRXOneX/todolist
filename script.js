@@ -1,11 +1,18 @@
-const btn = document.querySelector('.addBtn');
-const list = document.querySelector('#list');
-
+const btn = document.querySelector('.addBtn'),
+   list = document.querySelector('#list');
+let myLis;
+function local() {
+   myLis = list.innerHTML;
+   localStorage.setItem('myLis', myLis);
+}
 list.addEventListener('click', (e) => {
-      if(e.target.tagName === 'LI') {
-         e.target.classList.toggle('checked')
-      } else if (e.target.tagName === 'SPAN') {
-         let div = e.target.parentNode;
+   let li = document.querySelector('li');
+   if(e.target.tagName === 'LI') {
+      e.target.classList.toggle('checked');
+      local();
+   } else if(e.target.tagName === 'SPAN') {
+      let div = e.target.parentNode;
+      local();
       div.remove();
    }
 });
@@ -15,15 +22,21 @@ const newElements = () => {
    let t = document.createTextNode(input);
    li.appendChild(t);
    if(input == '') {
-      alert('Чтобы что нибудь получить, нужно что нибудь набрать!');
+      alert('Надо что-то набрать');
    } else {
       list.appendChild(li);
+
    }
    document.querySelector('#enter').value = '';
    let span = document.createElement('SPAN');
-   let txt = document.createTextNode('\u2716');
-   span.className = 'close';
+   let txt = document.createTextNode('X');
+   span.classList.add('close');
    span.appendChild(txt);
    li.appendChild(span);
+   local()
+}
+
+if(localStorage.getItem('myLis')) {
+   list.innerHTML = localStorage.getItem('myLis');
 }
 btn.addEventListener('click', () => newElements());
