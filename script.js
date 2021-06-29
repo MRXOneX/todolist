@@ -12,7 +12,6 @@ list.addEventListener('click', (e) => {
       local();
    } else if(e.target.tagName === 'SPAN') {
       let div = e.target.parentNode;
-      local();
       div.remove();
       local();
    }
